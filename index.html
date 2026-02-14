@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Matcha Blog - SPA 🍵</title>
+
+  <link rel="stylesheet" href="css/screenStyle.css" media="screen">
+  <link rel="stylesheet" href="public/css/printStyle.css" media="print">
+
+  <!-- Google Identity Services (JEDENKRÁT) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- JWT decode -->
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.js"></script>
+</head>
+
+<body>
+
+<header class="app-header">
+  <div class="header-logo">
+    🍵 <span>Matcha Blog</span>
+  </div>
+
+  <nav class="header-nav">
+    <a href="#welcome">Welcome</a>
+    <a href="#articlesAll">Articles from server</a>
+    <a href="#articles">Articles</a>
+    <a href="#artInsert">Add article</a>
+    <a href="#opinions">Opinions</a>
+    <a href="#addOpinion">Add opinion</a>
+  </nav>
+
+  <div id="googleLoginArea" class="login-area">
+
+    <div id="g_id_onload"
+         data-client_id="379352383460-f1ejtt5v6qqcf02pv8qkrnoec62vqb4j.apps.googleusercontent.com"
+         data-callback="onGoogleSignIn"
+         data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin"
+         id="googleSignInBtn"
+         data-type="standard"
+         data-theme="outline">
+    </div>
+
+    <button id="googleSignOutBtn" class="logout-btn" style="display:none;">
+        Log out
+    </button>
+
+</div>
+</header>
+
+<main style="padding:2rem; border-radius:16px; margin:2rem;">
+    <div id="router-view"></div>
+</main>
+
+
+<!-- rest of file remains exactly the same, all templates unchanged -->
+
+<!-- =============== WELCOME TEMPLATE =============== -->
+<script id="template-welcome" type="text/template">
+  <section id="welcome" class="welcome-box">
+    <h2 class="welcome-title">Welcome to Matcha Paradise 🍃</h2>
+
+    <p class="welcome-text">
+        Experience the art and health benefits of authentic Japanese matcha — from traditional tea ceremonies to modern recipes that energize body and mind.
+    </p>
+
+    <ul class="welcome-links">
+        <li>🍵 <a href="article1.html">Matcha Paradise – Main Page</a></li>
+        <li>🪴 <a href="article2.html">Health Benefits of Matcha</a></li>
+        <li>🍪 <a href="article3.html">Matcha Latte Art vs Coffee Latte Art</a></li>
+    </ul>
+</section>
+</script>
+
+<!-- =============== ARTICLES LIST =============== -->
+<script id="template-articles" type="text/template">
+  <article class="articles-wrapper">
+
+    <h2 class="articles-title">Articles</h2>
+
+    <div class="articles-grid">
+  {{#articles}}
+    <section class="matcha-card article-row">
+
+      {{#imageLink}}
+        <img class="article-thumb" src="{{imageLink}}">
+      {{/imageLink}}
+
+      <div class="article-info">
+        <h3 class="article-title">
+          <a href="{{detailLink}}">{{title}}</a>
+        </h3>
+
+        <p class="article-author-small">Author: {{author}}</p>
+        <p class="article-short">{{shortContent}}</p>
+      </div>
+
+    </section>
+  {{/articles}}
+</div>
+
+<div class="article-pagination">
+    
+    {{#showPrev}}
+      <a class="pagination-btn" href="#articlesAll/{{prevOffset}}/{{totalCount}}">« Previous</a>
+    {{/showPrev}}
+
+    {{#showNext}}
+      <a class="pagination-btn" href="#articlesAll/{{nextOffset}}/{{totalCount}}">Next »</a>
+    {{/showNext}}
+    
+</div>
+  </article>
+</script>
+
+<!-- =============== ERROR TEMPLATE =============== -->
+<script id="template-articles-error" type="text/template">
+  <article style="background:#ffe0e0; padding:1.5rem; border-radius:16px;">
+    <h2>Error</h2>
+    <p>{{errMessage}}</p>
+  </article>
+</script>
+
+<!-- =============== ARTICLE DETAIL =============== -->
+<script id="template-article" type="text/template">
+  <article class="article-detail-wrapper">
+
+    <h1 class="article-detail-title">{{title}}</h1>
+    <div class="article-detail-author">by {{author}}</div>
+
+    {{#imageLink}}
+      <figure>
+        <img src="{{imageLink}}" alt="article image" class="article-detail-image">
+      </figure>
+    {{/imageLink}}
+
+    <div class="article-detail-content">
+      {{{content}}}
+    </div>
+
+    {{#visibleTags}}
+    <p>
+        <strong>Keywords:</strong> {{visibleTags}}
+    </p>
+    {{/visibleTags}}
+
+    <div class="detail-buttons">
+      <a class="detail-btn btn-back" href="#articlesAll">&laquo; Back</a>
+      <a class="detail-btn btn-edit" href="{{editLink}}">Edit</a>
+      <a class="detail-btn btn-delete" href="{{deleteLink}}">Delete</a>
+    </div>
+
+  </article>
+
+  <div id="commentsContainer"></div>
+  <div id="commentFormContainer"></div>
+</script>
+
+<!-- =============== COMMENTS TEMPLATE (s pagináciou) =============== -->
+<script id="template-comments" type="text/template">
+  <section class="comments-box">
+    <h3 class="comments-title">Comments</h3>
+
+    {{#comments}}
+      <div class="comment-item">
+        <p class="comment-author">By {{author}}</p>
+        <p class="comment-text">{{text}}</p>
+      </div>
+    {{/comments}}
+
+    {{^comments}}
+      <p>No comments yet.</p>
+    {{/comments}}
+
+    <div class="comments-pagination">
+      {{#showPrev}}
+        <a class="btn-small" href="{{prevLink}}">&laquo; Previous</a>
+      {{/showPrev}}
+      {{#showNext}}
+        <a class="btn-small" href="{{nextLink}}">Next &raquo;</a>
+      {{/showNext}}
+    </div>
+
+    <button
+      id="addCommentBtn"
+      type="button"
+      class="detail-btn btn-back add-comment-trigger">
+      Add Comment
+    </button>
+  </section>
+</script>
+
+<!-- sem vložíš nový template -->
+<script id="template-comments-only" type="text/template">
+  <section style="background:#fff7aa; padding:1rem; border-radius:16px; margin-top:1.5rem;">
+    <h3>Comments</h3>
+
+    {{#comments}}
+      <div style="background:#e8f5e1; padding:0.8rem; border-radius:12px; margin:0.8rem 0;">
+        <p><strong>By {{author}}</strong></p>
+        <p>{{text}}</p>
+      </div>
+    {{/comments}}
+
+    {{^comments}}
+      <p>No comments yet.</p>
+    {{/comments}}
+
+    <div style="margin-top:0.8rem;">
+      {{#showPrev}}
+        <a class="linkAsButton" href="{{prevLink}}"><< Previous</a>
+      {{/showPrev}}
+      {{#showNext}}
+        <a class="linkAsButton" href="{{nextLink}}">Next >></a>
+      {{/showNext}}
+    </div>
+  </section>
+</script>
+
+<!-- =============== ADD COMMENT FORM =============== -->
+<script id="template-add-comment" type="text/template">
+  <div class="new-comment-section">
+
+    <h3>New Comment</h3>
+
+    <form id="newCommentForm">
+      <label>Author:</label>
+      <input class="comment-input" name="author" type="text" placeholder="e.g., Ján Trieska">
+
+      <label>Comment:</label>
+      <textarea class="comment-textarea" name="text"></textarea>
+
+      <div class="comment-buttons">
+        <button type="submit" class="btn-comment-main">Add Comment</button>
+        <button type="button" id="cancelCommentBtn" class="btn-comment-cancel">Cancel</button>
+      </div>
+    </form>
+
+  </div>
+</script>
+
+<!-- =============== ARTICLE FORM (EDIT / INSERT) =============== -->
+<script id="template-article-form" type="text/template">
+  <article class="opinion-section" id="form">
+    <div class="form-container">
+
+      <form id="articleForm" class="matcha-form">
+
+        <fieldset>
+          <legend>{{formTitle}}</legend>
+
+          <div>
+            <label>Author:<span class="required-star">*</span></label>
+            <input type="text" name="author" required placeholder="e.g., Jane Doe" value="{{author}}">
+          </div>
+
+          <div>
+            <label>Title:<span class="required-star">*</span></label>
+            <input type="text" name="title" required placeholder="Enter article title" value="{{title}}">
+          </div>
+
+          <div>
+            <label>Image URL (optional):</label>
+            <input type="url" name="imageLink" placeholder="http://example.com/image.jpg" value="{{imageLink}}">
+          </div>
+
+          <div>
+            <label>Content:<span class="required-star">*</span></label>
+            <textarea name="content" required placeholder="Write your article here..." rows="8">{{content}}</textarea>
+          </div>
+
+          <div>
+            <label>Tags (optional):</label>
+            <input type="text" name="tags" placeholder="e.g., matcha, health, recipe" value="{{tags}}">
+          </div>
+
+          <div style="margin-top:2rem; text-align:center;">
+            <button type="submit" class="matcha-btn submit">{{submitBtTitle}}</button>
+            <button type="reset" class="matcha-btn reset">Reset Form</button>
+          </div>
+
+        </fieldset>
+
+      </form>
+    </div>
+  </article>
+
+  <footer style="margin-top:2rem; text-align:center;">
+    <a href="{{backLink}}" class="linkAsButton"><< Back</a>
+  </footer>
+</script>
+
+<!-- OPINIONS LIST -->
+<script id="template-opinions" type="text/template">
+  <section class="opinions-wrapper">
+    
+    <h2 class="opinions-title">Visitor Opinions</h2>
+
+    <div class="opinions-list">
+      {{#opinions}}
+        <article class="opinion-card">
+
+          <div class="opinion-avatar">
+            {{#hasImage}}
+              <img class="opinion-avatar" src="{{imageUrl}}" alt="avatar">
+            {{/hasImage}}
+          </div>
+
+          <div class="opinion-body">
+            <h3 class="opinion-name">
+              {{name}}
+              <span class="opinion-date">({{createdDate}})</span>
+            </h3>
+
+            <p class="opinion-text">{{comment}}</p>
+            <p class="opinion-quality"><strong>Quality:</strong> {{qualityMessage}}</p>
+            <p class="opinion-subscribe">{{subscribeMessage}}</p>
+          </div>
+
+        </article>
+      {{/opinions}}
+    </div>
+
+  </section>
+</script>
+
+<!-- ADD OPINION -->
+<script id="template-addOpinion" type="text/template">
+    <article class="opinion-section" id="form">
+      <div class="form-container">
+        <form id="opinionForm">
+          <fieldset>
+            <legend>Share your thoughts about our website:</legend>
+
+            <div>
+              <label for="visitorName">Your Name:<span class="required-star">*</span></label>
+              <input type="text" id="visitorName" name="name" required placeholder="e.g., Jane Doe">
+            </div>
+
+            <div>
+              <label for="visitorEmail">Your E-mail:<span class="required-star">*</span></label>
+              <input type="email" id="visitorEmail" name="email" required placeholder="e.g., example@email.com">
+            </div>
+
+            <div>
+              <label for="visitorURL">Image URL (Optional):</label>
+              <input type="url" id="visitorURL" name="imageUrl" placeholder="http://example.com/image.jpg">
+            </div>
+
+            <div>
+              <label for="keywords">Key Keywords for the Blog:</label>
+              <input type="text" id="keywords" name="keywords" list="matchaKeywords" placeholder="Select or enter a keyword">
+              <datalist id="matchaKeywords">
+                <option value="Recipe">
+                <option value="Antioxidants">
+                <option value="Benefits">
+                <option value="Products">
+                <option value="Prepare">
+              </datalist>
+            </div>
+
+            <div class="radio-group">
+              <label>How would you rate the content quality?<span class="required-star">*</span></label><br>
+              <input type="radio" id="qualityExcellent" name="contentQuality" value="Excellent" required>
+              <label for="qualityExcellent">Excellent</label>
+              <input type="radio" id="qualityGood" name="contentQuality" value="Good">
+              <label for="qualityGood">Good</label>
+              <input type="radio" id="qualityAverage" name="contentQuality" value="Average">
+              <label for="qualityAverage">Average</label>
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="newsletter" name="subscribeNewsletter">
+              <label for="newsletter">I wish to subscribe to the Matcha Newsletter.</label>
+            </div>
+
+            <div>
+              <label for="opinionText">Your Opinion:<span class="required-star">*</span></label>
+              <textarea id="opinionText" name="opinionText" required placeholder="Write your comments here..."></textarea>
+            </div>
+
+            <div>
+              <button type="submit" class="btn">Send Opinion</button>
+              <button type="reset" class="btn">Reset Form</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </article>
+  </script>
+
+<div id="hiddenElm" style="display:none;"></div>
+
+<script src="js/articleFormsHandler.js"></script>
+<script type="module" src="js/routerInit.js"></script>
+<script src="js/googleSignIn.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,93 @@
+@media print {
+
+    /* 1. Všeobecné nastavenia stránky */
+    body {
+        background: white !important;        /* Čisto biele pozadie */
+        color: black !important;             /* Čierny text */
+        background-image: none !important;   /* Bez obrázkov na pozadí */
+        margin: 1cm;                         /* Okraj pre lepšiu čitateľnosť */
+        font-family: Georgia, "Times New Roman", serif !important; /* Pätkové písmo */
+        font-size: 11pt;
+        line-height: 1.4;
+    }
+
+    /* Odstránenie tieňov, farebných pozadí a iných efektov */
+    * {
+        background: transparent !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        color: black !important;
+    }
+
+    /* 2. Skrytie doplnkového a interaktívneho obsahu */
+    header,
+    nav,
+    .header,
+    .navbar,
+    .icons,
+    .search-form,
+    .cart-items-container,
+    .footer,
+    .share,
+    .btn,
+    .ads,
+    .sidebar,
+    .matcha-img,
+    .matcha-table caption {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Odkazy – zobraz len text, nie URL adresy */
+    a[href]:after {
+        content: "" !important;
+    }
+
+    /* 3. Typografia */
+    p, li, td {
+        font-family: Georgia, "Times New Roman", serif !important;
+        font-size: 11pt;
+        line-height: 1.4;
+        color: black !important;
+        orphans: 3;
+        widows: 3;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: black !important;
+        page-break-after: avoid;
+    }
+
+    /* 4. Obrázky */
+    img {
+        filter: grayscale(100%) !important; /* Čiernobiele obrázky */
+        max-width: 50%;
+        height: auto;
+    }
+
+    /* 5. Tabuľky */
+    table, th, td {
+        border: 1px solid black !important;
+        border-collapse: collapse !important;
+        background: white !important;
+        color: black !important;
+    }
+
+    /* 6. Boxy a kontajnery */
+    .box, .box-container {
+        border: 0.1rem solid #ccc !important;
+        background: none !important;
+    }
+
+    .article-content {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    .article-content > div {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+}
+
+

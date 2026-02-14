@@ -1,0 +1,1704 @@
+:root{
+	--main-color: #5d852e; 
+	--black: #13131a;
+	--bg: #f9f9f9; 
+	--border: .1rem solid rgba(0,0,0,.1);
+}
+
+*{
+	font-family: 'Roboto', sans-serif;
+	margin: 0; padding: 0;
+	box-sizing: border-box;
+	outline: none; border: none;
+	text-decoration: none;
+}
+
+html{
+	font-size: 62.5%; /* 1rem = 10px */
+}
+
+body{
+	background: var(--bg); 
+}
+
+section{
+	padding: 2rem 7%;
+}
+
+.heading{
+	text-align: center;
+	color: var(--black); 
+	text-transform: uppercase;
+	padding-bottom: 3.5rem;
+	font-size: 3.6rem;
+}
+
+.heading span{
+	color: var(--main-color);
+	text-transform: uppercase;
+}
+
+.btn{
+	margin-top: 1rem;
+	display: inline-block;
+	padding: .9rem 3rem;
+	font-size: 1.7rem;
+	color: #fff; 
+	background: var(--main-color); 
+	cursor: pointer;
+}
+
+.btn:hover{
+	letter-spacing: .2rem;
+	background: green; 
+}
+
+.header{
+	background: #fff; 
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1.5rem 7%;
+	border-bottom: var(--border);
+	position: fixed;
+	top: 0; left: 0; right: 0;
+	z-index: 1000;
+}
+
+.header .logo img{
+	height: 45px;
+	margin-left: 0; 
+}
+
+.header .navbar a{
+	margin: 0 1rem;
+	font-size: 1.6rem;
+	color: var(--black); 
+}
+
+.header .navbar a:hover{
+	color: var(--main-color);
+	border-bottom: .1rem solid var(--main-color);
+	padding-bottom: .5rem;
+}
+
+.header .icons div{
+	color: var(--black); 
+	cursor: pointer;
+	font-size: 2.5rem;
+	margin-left: 2rem;
+}
+
+.header .icons div:hover{
+	color: var(--main-color);
+}
+
+
+/* Skryjeme ikonu menu navždy, aby sme menu nezavreli (požiadavka) */
+#menu-btn{
+	display: none !important;
+}
+
+.header .search-form{
+	position: absolute;
+	top: 115%; right: 7%;
+	background: #fff;
+	width: 50rem;
+	height: 5rem;
+	display: flex;
+	align-items: center;
+	transform: scaleY(0);
+	transform-origin: top;
+}
+
+.header .search-form.active{
+	transform: scaleY(1);
+}
+
+.header .search-form input{
+	height: 100%;
+	width: 100%;
+	font-size: 1.6rem;
+	color: var(--black);
+	padding: 1rem;
+	text-transform: none;
+}
+
+.header .search-form label{
+	cursor: pointer;
+	font-size: 2.2rem;
+	margin-right: 1.5rem;
+	color: var(--black);
+}
+
+.header .search-form label:hover{
+	color: var(--main-color);
+}
+
+.header .cart-items-container{
+	position: absolute;
+	top: 100%; right: -100%;
+	height: calc(100vh - 9.5rem);
+	width: 35rem;
+	background: #fff;
+	padding: 0 1.5rem;
+}
+
+.header .cart-items-container.active{
+	right: 0;
+}
+
+
+.header .cart-items-container .cart-items{
+	position: relative;
+	margin: 2rem 0;
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+}
+
+.header .cart-items-container .cart-items .fa-times{
+	position: absolute;
+	top: 1rem; right: 1rem;
+	font-size: 2rem;
+	cursor: pointer;
+	color: var(--black);
+}
+
+.header .cart-items-container .cart-items .fa-times:hover{
+	color: var(--main-color);
+}
+
+.header .cart-items-container .cart-items img{
+	height: 7rem;
+}
+
+.header .cart-items-container .cart-items .content h3{
+	font-size: 2rem;
+	color: var(--black);
+	padding-bottom: .5rem;
+}
+
+.header .cart-items-container .cart-items .content .price{
+	font-size: 1.5rem;
+	color: var(--main-color);
+}
+
+.header .cart-items-container .btn{
+	width: 100%;
+	text-align: center;
+}
+
+.home{
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	background: url(../fig/home-img.jpg) no-repeat;
+	background-size: cover; 
+	background-position: center;
+}
+
+.home .content{
+	max-width: 60rem;
+}
+
+.home .content h3{
+	font-size: 5.5rem;
+	text-transform: uppercase;
+	color: #fff; 
+}
+
+.home .content p{
+	font-size: 2rem;
+	font-weight: lighter;
+	line-height: 1.8;
+	padding: 1rem 0;
+	color: #eee; 
+}
+
+.about .row{
+	display: flex;
+	align-items: center;
+	background: #fff; 
+	flex-wrap: wrap;
+	border: var(--border); 
+}
+
+.about .row .image{
+	flex: 1 1 45rem;
+}
+
+.about .row .image img{
+	width: 100%;
+}
+
+.about .row .content{
+	flex: 1 1 45rem;
+	padding: 2rem;
+}
+
+.about .row .content h3{
+	font-size: 2.3rem;
+	color: var(--black);
+}
+
+.about .row .content p{
+	font-size: 1.5rem;
+	color: #333; 
+	padding: 1rem 0;
+	line-height: 1.8;
+}
+
+/* 6 boxov - produkty */
+.menu .box-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+	gap: 2rem;
+}
+
+.menu .box-container .box{
+	padding: 5rem;
+	text-align: center;
+	border: var(--border);
+	background: #fff;
+}
+
+.menu .box-container .box img{
+	width: 100px;       
+  	height: 100px;      
+  	border-radius: 50%;
+  	object-fit: cover;   
+}
+
+.menu .box-container .box h3{
+	color: var(--black);	
+	font-size: 2rem;
+	padding: 1rem 0;
+}
+
+.menu .box-container .box .price{
+	color: var(--black);	
+	font-size: 2.5rem;
+	padding: .5rem 0;
+}
+
+.menu .box-container .box .price span{
+	font-size: 1.5rem;
+	text-decoration: line-through;
+	font-weight: lighter;
+}
+
+.menu .box-container .box:hover{
+	background: #5d852e;
+}
+
+.menu .box-container .box:hover > *{
+	color: white;
+}
+
+.products .box-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+	gap: 1.5rem;
+}
+
+.products .box-container .box{
+	text-align: center;
+	border: var(--border);
+	padding: 2rem;
+	background: #fff; 
+}
+
+.products .box-container .box .icons a{
+	height: 5rem;
+	width: 5rem;
+	line-height: 5rem;
+	font-size: 2rem;
+	border: var(--border);
+	color: var(--black);
+	margin: .3rem;
+}
+
+.products .box-container .box .icons a:hover{
+	background: var(--main-color);
+	color: #fff; 
+}
+
+.products .box-container .box .image{
+	padding: 2.5rem 0;
+}
+
+.products .box-container .box .image img{
+	height: 25rem;
+}
+
+.products .box-container .box .content h3{
+	color: var(--black); 
+	font-size: 2.5rem;
+}
+
+.products .box-container .box .content .stars{
+	padding: 1.5rem;	
+}
+
+.products .box-container .box .content .stars i{
+	font-size: 1.7rem;	
+	color: var(--main-color);
+}
+
+.products .box-container .box .content .price{
+	color: var(--black);
+	font-size: 2.5rem;
+}
+
+.products .box-container .box .content .price span{
+	text-decoration: line-through;
+	font-size: 1.5rem;
+}
+
+/* hodnotiaci ludia */
+.review .box-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+	gap: 1.5rem;
+}
+
+.review .box-container .box{
+	border: var(--border);
+	text-align: center;
+	padding: 3rem 2rem;
+	background: #fff; 
+}
+
+.review .box-container .box p{
+	font-size: 1.5rem;
+	line-height: 1.8;
+	color: #333;
+	padding: 2rem 0;
+}
+
+.review .box-container .box .user{
+	height: 7rem;
+	width: 7rem;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.review .box-container .box h3{
+	padding: 1rem 0;
+	font-size: 2rem;
+	color: var(--black); 
+}
+
+.review .box-container .box .stars i{
+	font-size: 1.5rem;
+	color: var(--main-color);
+}
+
+.contact .row{
+	display: flex;
+	background: #fff; 
+	flex-wrap: wrap;
+	gap: 1rem;
+	border: var(--border); 
+}
+
+.contact .row .map{
+	flex: 1 1 45rem;
+	width: 100%;
+	object-fit: cover;
+}
+
+.contact .row form{
+	flex: 1 1 45rem;
+	padding: 10rem 2rem;
+	text-align: center;
+}
+
+.contact .row form h3{
+	text-transform: uppercase;
+	font-size: 3.5rem;
+	color: var(--black); 
+}
+
+.contact .row form .inputBox{
+	display: flex;
+	align-items: center;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	background: var(--bg); 
+	border: var(--border);
+}
+
+.contact .row form .inputBox span{
+	color: var(--black);
+	font-size: 2rem;
+	padding-left: 2rem;
+}
+
+.contact .row form .inputBox input{
+	width: 100%;
+	padding: 2rem;
+	font-size: 1.7rem;
+	color: var(--black);
+	text-transform: none;
+	background: none;
+}
+
+.blogs .box-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+	gap: 1.5rem;
+}
+
+.blogs .box-container .box{
+	border: var(--border);
+	background: #fff; 
+}
+
+.blogs .box-container .box .image{
+	height: 25rem;
+	overflow: hidden;
+	width: 100%;
+}
+
+.blogs .box-container .box .image img{
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+.blogs .box-container .box .content{
+	padding: 2rem;
+}
+
+.blogs .box-container .box .content .title{
+	font-size: 2.5rem;
+	line-height: 1.5;
+	color: var(--black);
+}
+
+.blogs .box-container .box .content .title:hover{
+	color: var(--main-color);
+}
+
+.blogs .box-container .box .content span{
+	color: var(--main-color);
+	display: block;
+	padding-top: 1rem;
+	font-size: 2rem;
+}
+
+.blogs .box-container .box .content p{
+	font-size: 1.6rem;
+	line-height: 1.8;
+	color: #333; 
+	padding: 1rem 0;
+}
+
+.footer{
+	background: #fff; 
+	text-align: center;
+	border-top: var(--border);
+}
+
+.footer .share{
+	padding: 1rem;
+}
+
+.footer .share a{
+	height: 5rem;
+	width: 5rem;
+	line-height: 5rem;
+	font-size: 2rem;
+	color: var(--black);
+	border: var(--border);
+	margin: .3rem;
+	border-radius: 50%;
+}
+
+.footer .share a:hover{
+	background-color: var(--main-color);
+}
+
+.footer .links a:hover{
+	background: var(--main-color);
+}
+
+.matcha-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3rem 0; 
+    background: #fff;
+    border: 0.1rem solid #ccc;
+    font-size: 1.6rem; 
+    color: #333;
+}
+
+.matcha-table caption {
+    color: var(--main-color);
+    font-size: 1.8rem;
+    padding: 1.5rem 0;
+    caption-side: top;
+    text-align: center;
+}
+
+.matcha-table thead tr {
+    background: var(--main-color);
+}
+
+.matcha-table th, .matcha-table td {
+    padding: 1.5rem; 
+    border: 0.1rem solid #ccc;
+    text-align: left; 
+    font-size: 1.4rem;
+}
+
+.matcha-table th {
+    color: #fff;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.matcha-table tfoot tr {
+    background: rgba(93, 133, 46, 0.2);
+}
+
+.matcha-table tfoot td {
+    color: var(--main-color);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+
+@media (max-width: 1400px) {
+    section {
+        max-width: 1200px; 
+        margin: 0 auto;    
+        padding: 2rem 2%; 
+    }
+
+    /* 2. Optimálna šírka pre hlavný obsah článkov (article2/3.html) */
+    .article-content > div {
+        max-width: 800px !important; 
+        margin: 0 auto;             
+        padding: 0 20px;            
+    }
+}
+
+/* Úprava pre stredné obrazovky (tablety/menšie laptopy) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    section {
+        padding: 2rem 4%; 
+    }
+}
+
+/* 6 boxov s produktami - transformácia */
+.menu .box {
+    transition: all 0.5s ease; 
+}
+
+.menu .box:hover {
+	transform: scale(1.1);
+	background: #5d852e;
+	color: white;
+}
+
+/* meniaci sa farebny text v h1 - animacia */
+@keyframes pulse {
+	0% { transform: scale(1); color: blue; }
+	50% { transform: scale(1.1); color: red; }
+	100% { transform: scale(1); color: orange; }
+}
+
+.heading span {
+	animation: pulse 2s infinite;
+}
+
+/* obrazok article2, article3 - prechod */
+.matcha-img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+  margin: 15px; 
+  display: inline-block; 
+  overflow: hidden; 
+  perspective: 1000px; 
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+}
+
+.matcha-img:hover {
+  transform: translateY(-10px); 
+  transform: rotateY(15deg) rotateX(5deg) scale(1.05); 
+  box-shadow: 0 15px 30px green; 
+}
+
+/* menu po zmenseni stranky */
+
+#check {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .header .icons label#menu-btn {
+        display: inline-block !important; 
+        color: var(--main-color); 
+        cursor: pointer;
+        font-size: 2.2rem;
+    }
+
+    .header .navbar {
+        position: fixed; 
+        top: 7.5rem; 
+        right: -100%;
+        background: #fff;
+        width: 25rem;
+        height: 25rem; 
+        display: block; 
+    }
+    
+    .header .navbar a {
+        display: block;  
+        font-size: 1.5rem; /* 15px */
+        color: var(--black);
+        
+        padding: 1.5rem 2.5rem; /* 1.5rem hore/dole, 2.5rem vľavo/vpravo */
+        border-bottom: 0.1rem solid rgba(0, 0, 0, 0.08);
+        
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .header .navbar a:hover {
+        background: rgba(93, 133, 46, 0.1); 
+        color: var(--main-color);
+        border-bottom: 0.1rem solid var(--main-color);
+    }
+
+    #check:checked ~ .navbar {
+        right: 0;
+    }
+
+}
+
+/* Pravidlo, ktoré skryje hamburger ikonu na desktopoch */
+#menu-btn{
+    display: none;
+}
+
+/* display: flex -> používa sa, keď chcem usporiadať prvky do riadku alebo stĺpca */
+/* display: grid -> používa sa, keď chcem vytvoriť rozloženie do riadkov aj stĺpcov*/
+
+
+/* ---- Štýly pre Formulár ---- */
+
+/* Základný štýl pre kontajner formulára v článku */
+#opinionForm {
+    max-width: 750px; /* Zvýšená šírka */
+    padding: 20px;
+    margin: 0 auto; 
+    border: 1px solid var(--main-color);
+    border-radius: 8px;
+    background-color: #e9ffe9;
+    font-size: 1.6rem;
+}
+
+#opinionForm fieldset {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+#opinionForm legend {
+    font-size: 1.8rem;
+    color: var(--main-color);
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+#opinionForm div {
+    margin-bottom: 15px;
+}
+
+#opinionForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--black);
+}
+
+#opinionForm input[type="text"],
+#opinionForm input[type="email"],
+#opinionForm input[type="url"],
+#opinionForm textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.4rem;
+}
+
+#opinionForm textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#opinionForm .radio-group label,
+#opinionForm .checkbox-group label {
+    display: inline;
+    font-weight: normal;
+    margin-right: 15px;
+}
+
+#opinionForm button {
+    padding: 10px 20px;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    /*transition: background-color 0.3s;*/
+}
+
+#opinionForm button[type="submit"] {
+    background-color: var(--main-color);
+    color: white;
+}
+
+#opinionForm button[type="submit"]:hover {
+    background-color: #4a6c25;
+}
+
+#opinionForm button[type="reset"] {
+    background-color: #ccc;
+    color: var(--black);
+}
+
+#opinionForm button[type="reset"]:hover {
+    background-color: #bbb;
+}
+
+/* Pseudotriedy formulárov: :required - povinné polia, :optional - nepovinné polia, :valid - pole je správne vyplnené, :invalid - pole je nesprávne vyplnené */
+
+/* Povinné polia: žltý okraj (border-left) */
+input:required:not([type="radio"]):not([type="checkbox"]),
+textarea:required {
+    border-left: 5px solid yellow;
+}
+
+/* Nepovinné polia: modrý okraj (border-left) */
+input:not(:required):not([type="radio"]):not([type="checkbox"]),
+textarea:not(:required) {
+    border-left: 5px solid blue;
+}
+
+/* VŠEOBECNÉ NEVALIDNÉ POLIA (vyžadované, ale prázdne) */
+input:invalid:not([type="url"]):not([type="radio"]):not([type="checkbox"]),
+textarea:invalid {
+    /* Ponecháme border-color pre zistenie nevalidity */
+    border-color: red; 
+    box-shadow: none;
+    outline: 2px solid red; 
+    outline-offset: 1px;
+}
+
+/* ŠPECIFICKÁ ÚPRAVA: Nevalidné pole pre URL (nepovinné, ale zle zadané) */
+input[type="url"]:invalid:not(:placeholder-shown) {
+    /* Použijeme DOTTED border-style, ako ste požadovali */
+    border: 2px dotted red !important; 
+    box-shadow: none;
+    outline: none;
+    border-left: 5px solid #007bff; /* Zachovanie modrého ľavého okraja pre nepovinné */
+}
+
+
+/* Validné polia pri focus: zelený rám (použitie outline) */
+input:valid:not([type="radio"]):not([type="checkbox"]):focus,
+textarea:valid:focus {
+    border-color: green; 
+    box-shadow: none;
+    outline: 2px solid green; 
+    outline-offset: 1px;
+}
+
+/* ŠPECIFICKÝ KÓD PRE POTLAČENIE MODRÉHO/FIALOVÉHO POZADIA AUTOFIL-u */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+    /* Nastaví farbu textu na pôvodnú */
+    -webkit-text-fill-color: var(--black) !important; 
+    
+    /* Vynúti farbu pozadia pomocou vnútorného tieňa */
+    /* Použijeme farbu pozadia formulára: #e9ffe9 */
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    
+    /* Zabráni animácii prehliadača, ktorá by mohla farbu odhaliť */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Štýl pre hviezdičku (nepovinné, ale užitočné, ak potrebujete zmeniť farbu) */
+.required-star {
+    color: red;
+    margin-left: 3px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+
+
+
+/* ========================================================================= */
+/* ŠTÝLOVANIE SEKCIE NÁZOROV (RECENZIÍ) */
+/* ========================================================================= */
+
+/* Hlavný kontajner pre zoznam názorov */
+.opinions-list {
+    display: flex;
+    flex-direction: column; /* Názory pod sebou */
+    gap: 20px; /* Medzera medzi jednotlivými názormi */
+    margin-top: 30px;
+    padding: 0;
+}
+
+/* Štýl pre jednu recenziu/názor (element <section class="opinion-item">) */
+/* Poznámka: Pôvodne ste mali in-line štýly, tu ich prepisujem do triedy/CSS */
+.opinion-item {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin: 0;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Jemný tieň */
+    transition: transform 0.2s;
+}
+
+/* Efekt pri prechode myšou */
+.opinion-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Hlavička - Meno a Dátum */
+.opinion-item h3 {
+    color: var(--main-color); /* Farba z premennej */
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    padding-bottom: 5px;
+}
+
+/* Dátum vytvorenia */
+.opinion-item h3 i {
+    font-size: 1.6rem;
+    color: var(--black);
+    font-weight: normal;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+/* Všeobecné odseky v názore */
+.opinion-item p {
+    font-size: 1.6rem;
+    color: #333;
+    line-height: 1.6;
+    margin: 8px 0;
+}
+
+/* Tučné popisy (Email, Názor, Kľúčové slová) */
+.opinion-item p strong {
+    color: var(--black);
+    font-weight: 700;
+    margin-right: 5px;
+    min-width: 100px; /* Aby sa popisy zarovnali (ak by si ich chcela vedľa seba) */
+    display: inline-block;
+}
+
+/* Styling pre oznam o odberu noviniek (italic text) */
+.opinion-item p em {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.4rem;
+    color: #888;
+}
+
+/* Odkaz na obrázok (URL) */
+.opinion-item a {
+    color: #007bff; /* Modrý odkaz */
+    text-decoration: underline;
+    word-break: break-all; /* Zalomenie dlhých URL */
+}
+
+.opinion-item a:hover {
+    color: var(--main-color);
+}
+
+
+/* Špeciálne štýlovanie pre ne/prihlásenie na odber (em tag) */
+.opinion-item p:last-child {
+    font-style: italic;
+    color: #666;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 15px;
+}
+
+
+/* ------------------ */
+
+/* =================================== */
+/*  FORM CONTAINER                     */
+/* =================================== */
+
+.form-container {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* =================================== */
+/*  MATCHA FORM – ADD ARTICLE          */
+/* =================================== */
+
+.matcha-form {
+    border: 1px solid var(--main-color);
+    border-radius: 8px;
+    background-color: #e9ffe9;
+    padding: 20px;
+    font-size: 1.6rem;
+}
+
+.matcha-form fieldset {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.matcha-form legend {
+    font-size: 1.8rem;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.matcha-form div {
+    margin-bottom: 15px;
+}
+
+.matcha-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.matcha-form input[type="text"],
+.matcha-form input[type="url"],
+.matcha-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+}
+
+.matcha-form textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Buttons */
+.matcha-btn {
+    padding: 10px 20px;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.matcha-btn.submit { background-color: var(--main-color); color: white; }
+.matcha-btn.reset { background-color: #ccc; }
+.matcha-btn.submit:hover { background-color: #4a6c25; }
+.matcha-btn.reset:hover { background-color: #bbb; }
+
+/* =================================== */
+/*  ARTICLES LIST                      */
+/* =================================== */
+
+.articles-wrapper {
+    background: #fff7aa;
+    padding: 3rem;
+    border-radius: 20px;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.articles-title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+/* Grid for server articles */
+#articlesAll .articles-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Horizontal article card */
+.article-row {
+    display: flex;
+    gap: 2rem;
+    padding: 1.5rem;
+    background: #e9ffe9;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    margin-bottom: 2rem;
+}
+
+/* Thumbnail */
+.article-thumb {
+    width: 140px;
+    height: 140px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.article-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.article-title a {
+    font-size: 2.2rem;
+    color: var(--main-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.article-title a:hover { text-decoration: underline; }
+
+.article-author-small{
+    margin-top: 0.4rem;
+    font-size: 1.4rem;
+    color: #555;
+}
+
+.article-short {
+    margin-top: 8px;
+    font-size: 1.4rem;
+    color: black;           
+    line-height: 1.45;
+    max-width: 90%;
+    opacity: 0.9;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+
+/* Optional: zobraziť ... na konci textu */
+.article-short::after {
+    content: " ";
+}
+
+/* Pre mobilné zariadenia */
+@media (max-width: 600px) {
+    .article-short {
+        font-size: 0.95rem;
+        max-width: 100%;
+    }
+}
+
+/* =================================== */
+/*  ARTICLE DETAIL                     */
+/* =================================== */
+
+.article-detail-wrapper {
+    background: #eaffea;
+    padding: 3rem;
+    border-radius: 20px;
+    max-width: 1100px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.article-detail-title {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.article-detail-author {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+}
+
+.article-detail-image {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.article-detail-content {
+    font-size: 1.7rem;
+    line-height: 1.55;
+}
+
+.article-detail-keywords {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+}
+
+/* Buttons */
+.detail-buttons {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.detail-btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 1.6rem;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-back { background: #6ea868; }
+.btn-back:hover { background: #5b9256; }
+
+.btn-edit { background: #5b8aff; }
+.btn-edit:hover { background: #4b76e6; }
+
+.btn-delete { background: #d9534f; }
+.btn-delete:hover { background: #c4423f; }
+
+/* =================================== */
+/*  COMMENTS LIST                      */
+/* =================================== */
+
+.comments-box {
+  background: #e8f5e1;
+  padding: 1.5rem;
+  border-radius: 16px;
+  max-width: 1100px;
+  margin: 1.5rem auto;
+}
+
+.comments-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.comment-item {
+  background: white;
+  padding: 1rem;
+  margin: 0.7rem 0;
+  border-radius: 12px;
+  border-left: 6px solid #8ccf7b;
+}
+
+.comment-author {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.comment-text {
+  font-size: 1.4rem;
+}
+
+/* Pagination */
+.btn-small {
+  background: #c2e3b7;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: #2d4b21;
+}
+
+.btn-small:hover { background: #a7d59e; }
+
+/* =================================== */
+/*  COMMENT FORM                       */
+/* =================================== */
+
+.add-comment-box {
+  background: #fff7aa;
+  padding: 1.5rem;
+  border-radius: 16px;
+  max-width: 1100px;
+  margin: 2rem auto;
+}
+
+.add-comment-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.comment-input,
+.comment-textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 2px solid #d8d8d8;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.comment-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-matcha {
+  background: #6fae56;
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  color: white;
+}
+
+.btn-matcha:hover { background: #5d9447; }
+
+.btn-cancel {
+  background: #d3d3d3;
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+}
+
+.btn-cancel:hover { background: #bcbcbc; }
+
+/* top button */
+.btn-add-comment-top {
+  background: #6ea868;
+  padding: 0.7rem 1.4rem;
+  font-size: 1.6rem;
+  border-radius: 10px;
+  color: white;
+}
+
+.btn-add-comment-top:hover {
+  background: #5b9257;
+}
+
+/* =================================== */
+/* WELCOME SECTION – MATCHA STYLE      */
+/* =================================== */
+
+.welcome-box {
+    background: #f5ffe8;
+    border-radius: 20px;
+    padding: 2.5rem 3rem;
+    max-width: 900px;
+    margin: 3rem auto;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+}
+
+.welcome-title {
+    font-size: 2.8rem;
+    color: #2f5d24;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.welcome-text {
+    font-size: 1.7rem;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.welcome-links {
+    list-style: none;
+    padding-left: 0;
+}
+
+.welcome-links li {
+    font-size: 1.6rem;
+    margin: 0.6rem 0;
+}
+
+.welcome-links a {
+    color: #376b2e;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.welcome-links a:hover {
+    text-decoration: underline;
+}
+
+.add-comment-box {
+  background: #e9ffe9;    /* jemná matcha zelená */
+  padding: 1.8rem 2rem;
+  border-radius: 20px;
+  margin: 2rem auto;
+  max-width: 1100px;       /* rovnaká šírka ako článok */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+#commentsContainer {
+    max-width: 1100px;
+    margin: 0 auto 2rem auto;    /* centrovanie + spodný odstup */
+}
+
+.comment-item {
+    background: #ffffff;
+    padding: 1rem 1.4rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    border-left: 6px solid #8ccf7b;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.add-comment-trigger {
+    background: #6fae56;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.add-comment-trigger:hover {
+    background: #5c924a;
+}
+
+.btn-cancel-form {
+    background: #bbbbbb;
+    color: #000;
+}
+
+.btn-cancel-form:hover {
+    background: #a6a6a6;
+}
+
+.add-comment-trigger {
+    display: inline-block !important;
+    background: #6ea868 !important; /* rovnaká ako Back */
+    color: white !important;
+    padding: 0.8rem 1.6rem !important;
+    border-radius: 10px !important;
+    font-size: 1.6rem !important;
+    cursor: pointer;
+    border: none;
+}
+
+.add-comment-trigger:hover {
+    background: #5b9257 !important;
+}
+
+.add-comment-box {
+  background: #eaffea;              /* jemná zelená */
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 900px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.add-comment-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* input + textarea rámy */
+.add-comment-box input[type="text"],
+.add-comment-box textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  border: 2px solid #d0d0d0;        /* sivý rámik, žiadna červená */
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+/* zelený rámik pri focus */
+.add-comment-box input[type="text"]:focus,
+.add-comment-box textarea:focus {
+  outline: none;
+  border-color: #6ea868;
+}
+
+/* zrušíme default červené orámovanie z HTML5 validácie */
+.add-comment-box input[type="text"]:invalid,
+.add-comment-box textarea:invalid {
+  box-shadow: none;
+  border-color: #d0d0d0;
+}
+
+/* tlačidlá už máš ako detail-btn, len zarovnanie */
+.comment-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* WRAPPER okolo New Comment - rovnaká šírka ako komentáre */
+.new-comment-section {
+    max-width: 1100px;      /* rovnaké ako komentáre */
+    margin: 2rem auto;      /* centrovanie */
+    background: #edffe9;
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Form titulok */
+.new-comment-section h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+}
+
+/* Inputy */
+.comment-input,
+.comment-textarea {
+    width: 100%;                 /* šírka rovnako ako komentáre */
+    padding: 0.8rem;
+    border: 2px solid #d0d0d0;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.comment-input:focus,
+.comment-textarea:focus {
+    outline: none;
+    border-color: #6ea868;
+}
+
+/* Button container */
+.comment-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Tlačidlá ako Back/Edit/Delete */
+.btn-comment-main {
+    padding: 0.8rem 1.6rem;
+    background: #6ea868;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.btn-comment-main:hover {
+    background: #5c9257;
+}
+
+.btn-comment-cancel {
+    padding: 0.8rem 1.6rem;
+    background: #d3d3d3;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.btn-comment-cancel:hover {
+    background: #bfbfbf;
+}
+
+/* ===== YELLOW MAIN WRAPPER ===== */
+.opinions-wrapper {
+  background: #fff7aa;
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 1100px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* Title */
+.opinions-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: black;
+}
+
+/* LIST OF ALL OPINIONS */
+.opinions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Single green review card */
+.opinion-card {
+  background: #e9ffe9;
+  padding: 1.6rem;
+  border-radius: 16px;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* avatar */
+.opinion-avatar {
+    width: 100px;          /* pevná šírka */
+    height: 100px;         /* rovnaká výška → štvorec */
+    border-radius: 12px;  /* pekné zaoblenie (nechceš kruh) */
+    object-fit: cover;    /* oreže obrázok pekne na stred */
+    flex-shrink: 0;
+}
+
+.opinion-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* text part */
+.opinion-name {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  color: #2a4d1f;
+}
+
+.opinion-date {
+  font-size: 1.3rem;
+  color: #666;
+}
+
+.opinion-text {
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.opinion-quality,
+.opinion-subscribe {
+  font-size: 1.4rem;
+  color: #444;
+}
+
+.opinions-empty {
+  color: #444;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.pagination-btn {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    font-size: 1.6rem;
+    background: #6ea868;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    margin: 1.5rem 0;
+    transition: 0.2s;
+}
+
+.pagination-btn:hover {
+    background: #5c9257;
+}
+
+/* ==== HEADER ==== */
+.app-header {
+  text-align: center;
+  padding: 25px 20px 15px;
+  background: white;
+}
+
+.header-logo {
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.header-logo span {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ==== NAVIGATION ==== */
+.header-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 5px;
+}
+
+.header-nav a {
+  color: #4A2E7F;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 10px;
+  transition: 0.2s;
+}
+
+.header-nav a:hover {
+  color: #2f1b54;
+  text-decoration: underline;
+  transform: translateY(-1px);
+}
+
+
+.login-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto;
+    margin-top: -50px;
+}
+
+.g_id_signin {
+    padding: 6px 10px;
+    background: #3a8f5c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease-in-out;
+  }
+
+.g_id_signin:hover {
+    background: #2e724a;
+    transform: translateY(-1px);
+}
+
+.g_id_signin:active {
+    transform: scale(0.97);
+}
+
+.logout-btn {
+	padding: 10px 16px;
+    background: #3a8f5c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
